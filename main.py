@@ -1,4 +1,4 @@
-import network, time
+import machine, network, sys, time
 
 import config
 import readtemps
@@ -20,4 +20,9 @@ def wifi_connect(nic):
 nic = network.WLAN(network.STA_IF)
 wifi_connect(nic)
 
-readtemps.run()
+try:
+    readtemps.run()
+except Exception as e:
+    print("Got exception")
+    sys.print_exception(e)
+    machine.reset()
