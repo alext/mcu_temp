@@ -1,19 +1,23 @@
+import network, time
 
 import config
-import network
 import readtemps
 
-def wifi_connect(ssid, password):
-    sta_if = network.WLAN(network.STA_IF)
-    if not sta_if.isconnected():
-        print('connecting to network...')
-        sta_if.active(True)
-        sta_if.connect(ssid, password)
-        while not sta_if.isconnected():
-            pass
-    print('network config:', sta_if.ifconfig())
+def wifi_connect(nic):
+    if nic.isconnected():
+        print('already connected to network, config:', nic.ifconfig())
+        return
 
+    print('connecting to network...')
+    nic.active(True)
+    nic.connect(config.WIFI_NAME, config.WIFI_PASSWORD)
+    print('waiting for connection')
+    while not nic.isconnected():
+        time.sleep_ms(100)
+        print('.')
+    print('network config:', nic.ifconfig())
 
-wifi_connect(config.WIFI_NAME, config.WIFI_PASSWORD)
+nic = network.WLAN(network.STA_IF)
+wifi_connect(nic)
 
 readtemps.run()
