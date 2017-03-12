@@ -19,10 +19,10 @@ def run():
         time.sleep_ms(750)
         for rom in roms:
             r = rom_id(rom)
+            temp = ds.read_temp(rom)
+            print("Sensor %s, Read temperature %f" % (r, temp))
             if r in config.SENSORS:
                 url = config.SENSORS[r]
-                temp = ds.read_temp(rom)
-                print("Sensor %s, Read temperature %f" % (r, temp))
                 data = {"temperature": int(temp * 1000)}
                 resp = urequests.put(url, json=data)
                 if resp.status_code != 200:
@@ -30,7 +30,7 @@ def run():
                     print(resp.reason)
                     print(resp.text)
             else:
-                print("Unknown rom_id %s" % r)
+                print("No config for rom_id %s" % r)
 
         print("Sleeping for 60 secs")
         time.sleep(60)
@@ -44,10 +44,10 @@ def read_and_sleep():
     time.sleep_ms(750)
     for rom in roms:
         r = rom_id(rom)
+        temp = ds.read_temp(rom)
+        print("Sensor %s, Read temperature %f" % (r, temp))
         if r in config.SENSORS:
             url = config.SENSORS[r]
-            temp = ds.read_temp(rom)
-            print("Sensor %s, Read temperature %f" % (r, temp))
             data = {"temperature": int(temp * 1000)}
             resp = urequests.put(url, json=data)
             if resp.status_code != 200:
@@ -55,7 +55,7 @@ def read_and_sleep():
                 print(resp.reason)
                 print(resp.text)
         else:
-            print("Unknown rom_id %s" % r)
+            print("No config for rom_id %s" % r)
 
     print("Deep sleeping for 60 secs")
     rtc = machine.RTC()
