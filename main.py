@@ -17,6 +17,11 @@ def wifi_connect(nic):
         print('.')
     print('network config:', nic.ifconfig())
 
+ap = network.WLAN(network.AP_IF)
+if ap.active():
+    print('Disableing AP_IF')
+    ap.active(False)
+
 nic = network.WLAN(network.STA_IF)
 wifi_connect(nic)
 
