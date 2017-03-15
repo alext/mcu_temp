@@ -17,6 +17,9 @@ def wifi_connect(nic):
         print('.')
     print('network config:', nic.ifconfig())
 
+if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+    print('woke from a deep sleep')
+
 ap = network.WLAN(network.AP_IF)
 if ap.active():
     print('Disableing AP_IF')
@@ -26,7 +29,7 @@ nic = network.WLAN(network.STA_IF)
 wifi_connect(nic)
 
 try:
-    readtemps.run()
+    readtemps.read_and_sleep()
 except Exception as e:
     print("Got exception")
     sys.print_exception(e)
