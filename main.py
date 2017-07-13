@@ -29,7 +29,7 @@ if machine.reset_cause() == machine.DEEPSLEEP_RESET:
 
 ap = network.WLAN(network.AP_IF)
 if ap.active():
-    print('Disableing AP_IF')
+    print('Disabling AP_IF')
     ap.active(False)
 
 nic = network.WLAN(network.STA_IF)
