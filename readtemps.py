@@ -36,12 +36,3 @@ def run():
 
         print("Sleeping for 60 secs")
         time.sleep(60)
-
-def read_and_sleep():
-    read_temps()
-
-    print("Deep sleeping for 60 secs")
-    rtc = machine.RTC()
-    rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
-    rtc.alarm(rtc.ALARM0, 60000)
-    machine.deepsleep()
