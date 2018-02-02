@@ -14,9 +14,9 @@ def deep_sleep(duration):
 if machine.reset_cause() == machine.DEEPSLEEP_RESET:
     print('woke from a deep sleep')
 
-wifi.setup()
-
 try:
+    wifi.setup()
+
     readtemps.read_temps()
     deep_sleep(60)
 except Exception as e:
