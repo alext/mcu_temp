@@ -15,9 +15,11 @@ if machine.reset_cause() == machine.DEEPSLEEP_RESET:
     print('woke from a deep sleep')
 
 try:
+    s = readtemps.start_read()
+
     wifi.setup()
 
-    readtemps.read_temps()
+    readtemps.complete_read(s)
     deep_sleep(60)
 except Exception as e:
     print("Got exception")
