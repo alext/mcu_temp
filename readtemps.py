@@ -24,10 +24,10 @@ def read_temps():
 
     resp = urequests.put(config.UPDATE_URL, json=data)
     if resp.status_code != 200:
-        print("Sensor %s, Non-200 response %d" % (r, resp.status_code))
+        print("Non-200 response %d updating sensors" % (resp.status_code))
         print(resp.reason)
         print(resp.text)
-
+    resp.close()
 
 def run():
     while True:
