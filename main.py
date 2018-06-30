@@ -15,9 +15,9 @@ if machine.reset_cause() == machine.DEEPSLEEP_RESET:
     print('woke from a deep sleep')
 
 try:
+    w = wifi.setup()
     s = readtemps.start_read()
-
-    wifi.setup()
+    wifi.wait_for_connection(w)
 
     readtemps.complete_read(s)
     deep_sleep(60)

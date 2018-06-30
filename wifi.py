@@ -10,6 +10,8 @@ def connect(nic):
     print('connecting to network...')
     nic.active(True)
     nic.connect(config.WIFI_NAME, config.WIFI_PASSWORD)
+
+def wait_for_connection(nic):
     print('waiting for connection')
     while not nic.isconnected():
         time.sleep_ms(100)
@@ -24,3 +26,4 @@ def setup():
 
     sta = network.WLAN(network.STA_IF)
     connect(sta)
+    return sta
