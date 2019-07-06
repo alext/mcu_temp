@@ -11,16 +11,23 @@ def deep_sleep(duration):
     rtc.alarm(rtc.ALARM0, duration * 1000)
     machine.deepsleep()
 
+def device_id():
+    return ''.join("%02x" % b for b in machine.unique_id())
+
+
 if machine.reset_cause() == machine.DEEPSLEEP_RESET:
     print('woke from a deep sleep')
 
 try:
     w = wifi.setup()
     s = readtemps.start_read()
-    wifi.wait_for_connection(w)
 
-    data = {}
-    data["temperatures"] = readtemps.complete_read(s)
+    data = {
+        "device_id": device_id(),
+        "temperatures": readtemps.complete_read(s),
+    }
+
+    wifi.wait_for_connection(w)
     wifi.send_data(data)
 
     deep_sleep(60)
