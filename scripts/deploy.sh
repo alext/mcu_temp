@@ -2,7 +2,7 @@
 
 set -eu
 
-PORT=$1
+PORT=${PORT:-/dev/ttyUSB0}
 BAUD=${2:-115200}
 
 ampy --port "${PORT}" --baud "${BAUD}" put vendor/urequests.py
