@@ -19,7 +19,10 @@ try:
     s = readtemps.start_read()
     wifi.wait_for_connection(w)
 
-    readtemps.complete_read(s)
+    data = {}
+    data["temperatures"] = readtemps.complete_read(s)
+    wifi.send_data(data)
+
     deep_sleep(60)
 except Exception as e:
     print("Got exception")

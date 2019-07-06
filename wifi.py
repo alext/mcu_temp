@@ -1,5 +1,6 @@
 import network, time
 
+import urequests
 import config
 
 def connect(nic):
@@ -27,3 +28,11 @@ def setup():
     sta = network.WLAN(network.STA_IF)
     connect(sta)
     return sta
+
+def send_data(data):
+    resp = urequests.put(config.UPDATE_URL, json=data)
+    if resp.status_code != 200:
+        print("Non-200 response %d updating sensors" % (resp.status_code))
+        print(resp.reason)
+        print(resp.text)
+    resp.close()

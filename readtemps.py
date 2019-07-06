@@ -1,5 +1,4 @@
 import config
-import urequests
 
 import machine, onewire, ds18x20, time
 
@@ -23,24 +22,11 @@ def complete_read(prep_time):
     if delay > 0:
         time.sleep_ms(delay)
 
-    data = {"temperatures": {}}
+    temps = {}
     for rom in roms:
         r = rom_id(rom)
         temp = ds.read_temp(rom)
         print("Sensor %s, Read temperature %f" % (r, temp))
-        data["temperatures"][r] = int(temp * 1000)
+        temps[r] = int(temp * 1000)
 
-    resp = urequests.put(config.UPDATE_URL, json=data)
-    if resp.status_code != 200:
-        print("Non-200 response %d updating sensors" % (resp.status_code))
-        print(resp.reason)
-        print(resp.text)
-    resp.close()
-
-
-def run():
-    while True:
-        complete_read(prepare_read())
-
-        print("Sleeping for 60 secs")
-        time.sleep(60)
+    return temps
