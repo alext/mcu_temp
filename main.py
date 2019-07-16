@@ -1,4 +1,4 @@
-import machine, network, sys, time
+import machine, sys
 
 import config
 import wifi
@@ -15,6 +15,11 @@ def device_id():
     return ''.join("%02x" % b for b in machine.unique_id())
 
 
+def read_psu_voltage():
+    raw = machine.ADC(0).read()
+    return raw / config.VOLTAGE_DIVISOR
+
+
 if machine.reset_cause() == machine.DEEPSLEEP_RESET:
     print('woke from a deep sleep')
 
@@ -24,6 +29,7 @@ try:
 
     data = {
         "device_id": device_id(),
+        "supply_voltage": read_psu_voltage(),
         "temperatures": readtemps.complete_read(s),
     }
 
