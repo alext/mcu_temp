@@ -1,0 +1,4 @@
+substitutions:
+  devicename: mcu-dev
+
+<<: !include ../temp_sensor.yaml
