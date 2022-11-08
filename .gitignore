@@ -1,3 +1,4 @@
-/env
-/config.py
-/vendor/*.bin
+# Micropython bits
+/micropython/env
+/micropython/config.py
+/micropython/vendor/*.bin
