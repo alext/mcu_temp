@@ -1,0 +1,4 @@
+substitutions:
+  devicename: mcu-living-room
+
+<<: !include roles/temp_sensor.yaml
