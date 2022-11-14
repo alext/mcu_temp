@@ -13,6 +13,7 @@ ota:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  fast_connect: true
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -24,9 +25,23 @@ web_server:
 
 captive_portal:
 
+deep_sleep:
+  id: deep_sleep_1
+  run_duration: 1s
+  sleep_duration: 59s
+
 mqtt:
   broker: 10.10.10.1
   discovery: false
+  on_message:
+    - topic: $devicename/ota_mode
+      payload: 'ON'
+      then:
+        - deep_sleep.prevent: deep_sleep_1
+    - topic: $devicename/sleep_mode
+      payload: 'ON'
+      then:
+        - deep_sleep.enter: deep_sleep_1
 
 dallas:
   - pin: 13
