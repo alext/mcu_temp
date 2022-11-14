@@ -34,5 +34,5 @@ dallas:
 sensor:
   - platform: dallas
     index: 0
-    name: "Dev Temperature"
+    name: "Temperature"
     accuracy_decimals: 3
