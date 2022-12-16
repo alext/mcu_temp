@@ -31,7 +31,7 @@ deep_sleep:
   sleep_duration: 59s
 
 mqtt:
-  broker: 10.10.10.1
+  broker: 10.10.10.28
   discovery: false
   on_message:
     - topic: $devicename/ota_mode
