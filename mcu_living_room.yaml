@@ -2,3 +2,9 @@ substitutions:
   devicename: mcu-living-room
 
 <<: !include roles/temp_sensor.yaml
+
+sensor:
+  - platform: dallas
+    index: 0
+    name: "Temperature"
+    accuracy_decimals: 3

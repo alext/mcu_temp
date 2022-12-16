@@ -45,9 +45,3 @@ mqtt:
 
 dallas:
   - pin: 13
-
-sensor:
-  - platform: dallas
-    index: 0
-    name: "Temperature"
-    accuracy_decimals: 3
