@@ -1,0 +1,14 @@
+substitutions:
+  devicename: mcu-shed
+
+<<: !include roles/temp_sensor.yaml
+
+sensor:
+  - platform: dallas
+    address: "0xdb000005820ece28"
+    name: "Temperature"
+    accuracy_decimals: 3
+  - platform: dallas
+    address: "0x580314638238ff28"
+    name: "Outside Temperature"
+    accuracy_decimals: 3
