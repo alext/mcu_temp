@@ -32,6 +32,8 @@ deep_sleep:
 
 mqtt:
   broker: 10.10.10.28
+  birth_message:
+  will_message:
   on_message:
     - topic: $devicename/ota_mode
       payload: 'ON'
