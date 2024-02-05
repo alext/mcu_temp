@@ -31,7 +31,7 @@ deep_sleep:
   sleep_duration: 59s
 
 mqtt:
-  broker: 10.10.10.28
+  broker: mqtt.tomlins.org.uk
   birth_message:
   will_message:
   on_message:
